@@ -9,11 +9,38 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    font-family: "Karla", sans-serif;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 1.1;
+    text-align: center;
 }
 
 main {
     background-color: #F5F5F5;
-    width: 320px;
+    width: 400px;
     aspect-ratio: 1;
     border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
+
+.die-container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
+}
+
+.die-box {
+    width: 40px;
+    aspect-ratio: 1;
+    background-color: #fff;
+    box-shadow: 0 0 2px 2px rgba(0, 0, 0, .15);
+    border-radius: 3px;
+    color: #2B283A;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}   
