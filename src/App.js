@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Die from "./Die";
 
 export default function App() {
@@ -8,22 +8,20 @@ export default function App() {
     return Array.from('helloworld').map(x => Math.ceil(Math.random() * 6));
   }
 
-  console.log(allNewDice())
+  const [dice, setDice] = useState(() => allNewDice());
+
+  const diceElements = dice.map((die, index) => <Die key={index} value={die} />);
+
+  function rollDice() {
+      setDice(allNewDice());
+  }
 
   return (
     <main>
       <div className="die-container">
-        <Die value={0} />
-        <Die value={0} />
-        <Die value={0} />
-        <Die value={0} />
-        <Die value={0} />
-        <Die value={0} />
-        <Die value={0} />
-        <Die value={0} />
-        <Die value={0} />
-        <Die value={0} />
+        {diceElements}
       </div>
+      <button className="btn-roll" type="button" onClick={rollDice}>Roll Dice</button>
     </main>
   );
 }
