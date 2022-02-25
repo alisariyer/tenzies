@@ -3,45 +3,57 @@ import Die from "./Die";
 import { nanoid } from "nanoid";
 
 export default function App() {
+  const [dice, setDice] = useState(() => allNewDice());
 
+  // helper function
+  function generateNewDie() {
+    return {
+      value: Math.ceil(Math.random() * 6),
+      isHeld: false,
+      id: nanoid(),
+    };
+  }
   function allNewDice() {
     // TIP: [...Array(10).keys()] to create a list [0, 1, ... 10]
     // create an array of object to keep 10 random numbers and held status
-    return Array.from('helloworld').map(x => ({ 
-        value: Math.ceil(Math.random() * 6), 
-        isHeld: false,
-        id: nanoid()
-    }));
+    return Array.from("helloworld").map((x) => generateNewDie());
   }
 
-  const [dice, setDice] = useState(() => allNewDice());
-
-  const diceElements = dice.map((die, index) => <Die key={index} die={die} handleHeld={handleHeld}/>);
+  const diceElements = dice.map((die, index) => (
+    <Die key={index} die={die} handleHold={handleHold} />
+  ));
 
   function rollDice() {
-      setDice(allNewDice());
+    setDice((prevDice) =>
+      prevDice.map((dice) => {
+        return dice.isHeld
+          ? dice
+          : generateNewDie();
+      })
+    );
   }
 
-  function handleHeld(id) {
-      setDice(prevDice => {
-          return prevDice.map(dice => {
-              if (dice.id === id) {
-                  return {
-                      ...dice,
-                      isHeld: !dice.isHeld
-                  }
-              }
-              return dice;
-          })
+  function handleHold(id) {
+    setDice((prevDice) =>
+      prevDice.map((die) => {
+        return die.id === id
+          ? {
+              ...die,
+              isHeld: !die.isHeld,
+            }
+          : die;
       })
+    );
   }
 
   return (
     <main>
-      <div className="die-container">
-        {diceElements}
-      </div>
-      <button className="btn-roll" type="button" onClick={rollDice}>Roll</button>
+        <h1 className="title">Tenzies</h1>
+        <p className="instructions">Roll until all dice are the same. Click each die to freeze it at its current value between rolls.</p>
+      <div className="die-container">{diceElements}</div>
+      <button className="btn-roll" type="button" onClick={rollDice}>
+        Roll
+      </button>
     </main>
   );
 }
