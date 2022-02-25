@@ -4,4 +4,16 @@
 
 body {
     margin: 0;
+    background-color: #0B2434;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+main {
+    background-color: #F5F5F5;
+    width: 320px;
+    aspect-ratio: 1;
+    border-radius: 10px;
 }
