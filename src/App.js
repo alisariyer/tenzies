@@ -35,12 +35,19 @@ export default function App() {
   ));
 
   function rollDice() {
-    setDice((prevDice) =>
-      prevDice.map((dice) => {
-        return dice.isHeld ? dice : generateNewDie();
-      })
-    );
+    if (tenzies) {
+      setTenzies(false);
+      setDice(allNewDice());
+    } else {
+      setDice((prevDice) =>
+        prevDice.map((dice) => {
+          return dice.isHeld ? dice : generateNewDie();
+        })
+      );
+    }
   }
+
+  console.log("App rendered");
 
   function handleHold(id) {
     setDice((prevDice) =>
