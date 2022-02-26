@@ -21,6 +21,7 @@ body {
 }
 
 main {
+    position: relative;
     background-color: #F5F5F5;
     width: 400px;
     aspect-ratio: 1;
@@ -31,6 +32,12 @@ main {
     align-items: center;
     gap: 10px;
     padding: 20px;
+}
+
+.confetti {
+    position: absolute;
+    left: 0;
+    top: 0;
 }
 
 .title {
