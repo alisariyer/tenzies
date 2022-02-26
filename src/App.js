@@ -7,7 +7,10 @@ export default function App() {
   const [tenzies, setTenzies] = useState(false);
 
   useEffect(() => {
-    console.log("Dice state has changed");
+    // check if all die is hold and all die value is same
+    const isWin = dice.every(die => die.isHeld && die.value === dice[0].value);
+    setTenzies(isWin);
+    console.log(isWin);
   }, [dice])
 
   // helper function
