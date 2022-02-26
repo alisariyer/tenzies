@@ -13,7 +13,6 @@ export default function App() {
       (die) => die.isHeld && die.value === dice[0].value
     );
     setTenzies(isWin);
-    console.log(isWin);
   }, [dice]);
 
   // helper function
