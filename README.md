@@ -1,70 +1,91 @@
-# Getting Started with Create React App
+# Scrimba - Tenzies Game Project
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is one of the final projects after 11 hours React Course on [scrimba](https://scrimba.com/) by [Bob Ziroll](https://twitter.com/bobziroll).
 
-## Available Scripts
+## Table of contents
 
-In the project directory, you can run:
+- [Overview](#overview)
+  - [The challenge](#the-challenge)
+  - [Screenshot](#screenshot)
+  - [Links](#links)
+- [My process](#my-process)
+  - [Built with](#built-with)
+  - [Depolyment](#deploy-process)
+  - [What I learned](#what-i-learned)
+  - [Continued development](#continued-development)
+  - [Useful resources](#useful-resources)
+- [Author](#author)
+- [Acknowledgments](#acknowledgments)
 
-### `npm start`
+## Overview
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### The challenge
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Users should be able to:
 
-### `npm test`
+- Make HTML base structure and CSS design as indicated in [figma file](https://www.figma.com/file/1aj3XqV79CF3H99oTc5Y9O/Tenzies-(Copy)?node-id=2%3A31)
+- Make interaction by using React.js library
+- When user click on roll button each die must be changed randomly 1 to 6 if it is not hold.
+- When user hold all same dies, change button to New Game and integrate and run Confetti package.
+- **Bonus**: While user click count each count and show.
+- **Bonus**: When user win, show the shortest winner time keeped in localStorage and user's time
+- **Bonus**: Change numbers to dots aa they represent dice.
+- **Bonus**: Make it responsive
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Screenshot
 
-### `npm run build`
+![](./screenshot.png)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Links
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- Solution URL: [Project solution link](https://github.com/alisariyer/tenzies/)
+- Live Site URL: [Live site url](https://alisariyer.github.io/tenzies/)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## My process
 
-### `npm run eject`
+### Built with
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- Semantic HTML5 markup
+- CSS custom properties
+- Flexbox
+- CSS Grid
+- Mobile-first workflow
+- [React](https://reactjs.org/) - JS library
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Deploy process
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+1. Install gh-pages from terminal: npm install gh-pages **--save-dev**
+2. Add "homepage": "https://{username}.github.io" into package.json file after name, version etc. values
+3. In package.json file in scripts value add again a key-value pair as:
+4. "predeploy": "npm run build"
+5. "deploy": "gh-pages -d build"
+6. If you've not initilalized your git repository: "git init" **then** "git remote add origin your-github-repository-url.git"
+7. Then run from terminal: "npm run deploy"
+8. Choose in github pages as branch: gh-pages then publish.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### What I learned
 
-## Learn More
+I learned and practices React.js, lazy states, useEffect, modular programming, helper functions, shorter and clever algorithms.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```javascript
+    // check if all die is hold and all die value is same
+    const isWin = dice.every(
+      (die) => die.isHeld && die.value === dice[0].value
+    );
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+    function allNewDice() {
+    // TIP: [...Array(10).keys()] to create a list [0, 1, ... 10]
+    // create an array of object to keep 10 random numbers and held status
+    return Array.from("helloworld").map((x) => generateNewDie());
+  }
+```
 
-### Code Splitting
+### Continued development
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+I'll focus in React.js deeply to make more modular application and also practice JavaScript challanges to have a good experience on JS. Grid CSS also I'll try to use more to learn well.
 
-### Analyzing the Bundle Size
+## Author
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- Website - [Ali Sariyer](https://www.alisariyer.com)
+- Linkedin - [Ali Sariyer](https://www.linkedin.com/in/alisariyer)
+- Twitter - [@sariyer_ali](https://www.twitter.com/sariyer_ali)
