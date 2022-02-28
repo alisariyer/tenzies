@@ -56,7 +56,6 @@ export default function App() {
     }
   }
 
-    console.log(counter)
   function handleHold(id) {
     setDice((prevDice) =>
       prevDice.map((die) => {
@@ -79,10 +78,12 @@ export default function App() {
       )}
       <section>
         <h1 className="title">Tenzies</h1>
-        <p className="instructions">
-          Roll until all dice are the same. Click each die to freeze it at its
-          current value between rolls.
-        </p>
+        { counter ? 
+          <p className="instructions">Counter: {counter}</p> : 
+          <p className="instructions">
+            Roll until all dice are the same. Click each die to freeze it at its
+            current value between rolls.
+          </p>}
       </section>
       <div className="die-container">{diceElements}</div>
       <button className="btn-roll" type="button" onClick={rollDice}>
