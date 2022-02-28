@@ -45,12 +45,19 @@ main {
     font-size: 40px;
 }
 
-.instructions {
+.instructions, .counter {
     color: #4A4E74;
     font-family: "Inter", sans-serif;
     font-size: 16px;
     line-height: 1.4;
     max-width: 300px;
+}
+
+.counter {
+    font-size: 18px;
+    padding-block: 19px;
+    text-align: left;
+    padding: 19px 0 19px 19px;
 }
 
 .die-container {
