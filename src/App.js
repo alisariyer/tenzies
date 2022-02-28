@@ -4,8 +4,16 @@ import { nanoid } from "nanoid";
 import Confetti, { ReactConfetti } from "react-confetti";
 
 export default function App() {
+
+  // set a dice state to keep 10 Die object created by generateNewDie function
   const [dice, setDice] = useState(() => allNewDice());
+
+  // set a tenzies state to check if the user win or not
   const [tenzies, setTenzies] = useState(false);
+
+  // set a counter state to count each click on roll button
+  // with purpose of the save the best score in localStorage
+  const [counter, setCounter] = useState(0);
 
   useEffect(() => {
     // check if all die is hold and all die value is same
@@ -37,17 +45,18 @@ export default function App() {
     if (tenzies) {
       setTenzies(false);
       setDice(allNewDice());
+      setCounter(0)
     } else {
       setDice((prevDice) =>
         prevDice.map((dice) => {
           return dice.isHeld ? dice : generateNewDie();
         })
       );
+      setCounter(counter + 1)
     }
   }
 
-  console.log("App rendered");
-
+    console.log(counter)
   function handleHold(id) {
     setDice((prevDice) =>
       prevDice.map((die) => {
