@@ -4,16 +4,25 @@ import { nanoid } from "nanoid";
 import Confetti from "react-confetti";
 
 export default function App() {
-
   // set a dice state to keep 10 Die object created by generateNewDie function
   const [dice, setDice] = useState(() => allNewDice());
 
   // set a tenzies state to check if the user win or not
   const [tenzies, setTenzies] = useState(false);
 
-  // set a counter state to count each click on roll button
+  // set a lap state to count each click, lap time, and overall time for roll button
   // with purpose of the save the best score in localStorage
-  const [counter, setCounter] = useState(0);
+  const [lap, setLap] = useState(() => getNewLap());
+
+  function getNewLap() {
+    const time = new Date().getTime();
+    return {
+      lap: 0,
+      prevClickTime: time,
+      lapsTime: 0,
+      overallTime: 0,
+    };
+  }
 
   useEffect(() => {
     // check if all die is hold and all die value is same
@@ -45,14 +54,25 @@ export default function App() {
     if (tenzies) {
       setTenzies(false);
       setDice(allNewDice());
-      setCounter(0)
+      setLap(getNewLap());
     } else {
       setDice((prevDice) =>
         prevDice.map((dice) => {
           return dice.isHeld ? dice : generateNewDie();
         })
       );
-      setCounter(counter + 1)
+      setLap((prevLap) => {
+        console.log("setLap has ran");
+        const currentTime = new Date().getTime();
+        console.log(currentTime);
+        console.log(prevLap);
+        return {
+          lap: prevLap.lap + 1,
+          prevClickTime: currentTime,
+          lapsTime: currentTime - prevLap.prevClickTime,
+          overallTime: prevLap.overallTime + (currentTime - prevLap.prevClickTime),
+        };
+      });
     }
   }
 
@@ -78,12 +98,29 @@ export default function App() {
       )}
       <section>
         <h1 className="title">Tenzies</h1>
-        { counter ? 
-          <p className="counter">Counter: {counter}</p> : 
+        {lap.lap ? (
+          <table className="lap-table">
+            <thead>
+              <tr>
+                <th>Lap</th>
+                <th>Laps Time</th>
+                <th>Overall Time</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{lap.lap}</td>
+                <td>{(lap.lapsTime / 1000).toFixed(2)}s</td>
+                <td>{(lap.overallTime / 1000).toFixed(2)}s</td>
+              </tr>
+            </tbody>
+          </table>
+        ) : (
           <p className="instructions">
             Roll until all dice are the same. Click each die to freeze it at its
             current value between rolls.
-          </p>}
+          </p>
+        )}
       </section>
       <div className="die-container">{diceElements}</div>
       <button className="btn-roll" type="button" onClick={rollDice}>

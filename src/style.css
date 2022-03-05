@@ -53,11 +53,22 @@ main {
     max-width: 300px;
 }
 
-.counter {
-    font-size: 18px;
-    padding-block: 19px;
-    text-align: left;
-    padding: 19px 0 19px 19px;
+.lap-table {
+    display: block;
+    font-size: 17px;
+    text-align: center;
+    padding-top: 8px;
+}
+
+.lap-table th {
+    color: #5035FF;
+}
+
+.lap-table td {
+    color:#4A4E74;
+}
+.lap-table th, td {
+    padding-inline: 5px;
 }
 
 .die-container {
