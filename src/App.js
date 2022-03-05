@@ -14,6 +14,13 @@ export default function App() {
   // with purpose of the save the best score in localStorage
   const [lap, setLap] = useState(() => getNewLap());
 
+  // get get score if exist from localStorage
+  const [bestScore, setBestScore] = useState(() =>
+    JSON.parse(localStorage.getItem("bestScore")) || null);
+
+  // check if the user pass the best score
+  const [isBestScore, setIsBestScore] = useState(false);
+
   function getNewLap() {
     const time = new Date().getTime();
     return {
@@ -29,6 +36,30 @@ export default function App() {
     const isWin = dice.every(
       (die) => die.isHeld && die.value === dice[0].value
     );
+
+    // if the user has won
+    if (isWin) {
+
+      // if any bestScore exists in localStorage
+      if (bestScore) {
+
+        // if current total time is smaller than bestScore time
+        if (lap.overallTime < bestScore.overallTime) {
+          setBestScore({
+            lap: lap.lap,
+            overallTime: lap.overallTime,
+          });
+          localStorage.setItem('bestScore', JSON.stringify({lap: lap.lap, overallTime: lap.overallTime}))
+          setIsBestScore(true);
+        } else {
+          setIsBestScore(false);
+        }
+
+      // if there is no best score in localStorage set current as a best
+      } else {
+        localStorage.setItem('bestScore', JSON.stringify({ lap: lap.lap, overallTime: lap.overallTime}))
+      }
+    }
     setTenzies(isWin);
   }, [dice]);
 
@@ -51,6 +82,7 @@ export default function App() {
   ));
 
   function rollDice() {
+    // If the game is finished
     if (tenzies) {
       setTenzies(false);
       setDice(allNewDice());
@@ -70,7 +102,8 @@ export default function App() {
           lap: prevLap.lap + 1,
           prevClickTime: currentTime,
           lapsTime: currentTime - prevLap.prevClickTime,
-          overallTime: prevLap.overallTime + (currentTime - prevLap.prevClickTime),
+          overallTime:
+            prevLap.overallTime + (currentTime - prevLap.prevClickTime),
         };
       });
     }
